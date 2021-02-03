@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import org.seariver.BaseActor;
 import org.seariver.BaseScreen;
-import org.seariver.actor.Explosion;
+import org.seariver.actor.ExplosionEffect;
 import org.seariver.actor.Rock;
 import org.seariver.actor.Spaceship;
 
@@ -38,8 +38,10 @@ public class LevelScreen extends BaseScreen {
         for (BaseActor rockActor : BaseActor.getList(mainStage, "org.seariver.actor.Rock")) {
             if (rockActor.overlaps(spaceship)) {
                 if (spaceship.shieldPower <= 0) {
-                    Explosion boom = new Explosion(0, 0, mainStage);
+                    ExplosionEffect boom = new ExplosionEffect();
                     boom.centerAtActor(spaceship);
+                    boom.start();
+                    mainStage.addActor(boom);
                     spaceship.remove();
                     spaceship.setPosition(-1000, -1000);
 
@@ -51,8 +53,10 @@ public class LevelScreen extends BaseScreen {
                     gameOver = true;
                 } else {
                     spaceship.shieldPower -= 34;
-                    Explosion boom = new Explosion(0, 0, mainStage);
+                    ExplosionEffect boom = new ExplosionEffect();
                     boom.centerAtActor(rockActor);
+                    boom.start();
+                    mainStage.addActor(boom);
                     rockActor.remove();
                 }
 
@@ -60,8 +64,10 @@ public class LevelScreen extends BaseScreen {
 
             for (BaseActor laserActor : BaseActor.getList(mainStage, "org.seariver.actor.Laser")) {
                 if (laserActor.overlaps(rockActor)) {
-                    Explosion boom = new Explosion(0, 0, mainStage);
+                    ExplosionEffect boom = new ExplosionEffect();
                     boom.centerAtActor(rockActor);
+                    boom.start();
+                    mainStage.addActor(boom);
                     laserActor.remove();
                     rockActor.remove();
                 }

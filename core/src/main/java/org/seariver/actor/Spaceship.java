@@ -8,7 +8,7 @@ import org.seariver.BaseActor;
 
 public class Spaceship extends BaseActor {
 
-    private Thrusters thrusters;
+    private ThrusterEffect thrusterEffect;
     private Shield shield;
     public int shieldPower;
 
@@ -22,11 +22,11 @@ public class Spaceship extends BaseActor {
         setMaxSpeed(100);
         setDeceleration(10);
 
-
-        thrusters = new Thrusters(0, 0, stage);
-        addActor(thrusters);
-        thrusters.setPosition(-thrusters.getWidth(),
-                getHeight() / 2 - thrusters.getHeight() / 2);
+        thrusterEffect = new ThrusterEffect();
+        thrusterEffect.setPosition(0, 32);
+        thrusterEffect.setRotation(90);
+        thrusterEffect.setScale(0.25f);
+        addActor(thrusterEffect);
 
         shield = new Shield(0, 0, stage);
         addActor(shield);
@@ -55,23 +55,23 @@ public class Spaceship extends BaseActor {
         warp2.centerAtActor(this);
     }
 
-    public void act(float dt) {
-        super.act(dt);
+    public void act(float deltaTime) {
+        super.act(deltaTime);
 
         float degreesPerSecond = 120; // degrees per second
         if (Gdx.input.isKeyPressed(Keys.LEFT))
-            rotateBy(degreesPerSecond * dt);
+            rotateBy(degreesPerSecond * deltaTime);
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
-            rotateBy(-degreesPerSecond * dt);
+            rotateBy(-degreesPerSecond * deltaTime);
 
         if (Gdx.input.isKeyPressed(Keys.UP)) {
             accelerateAtAngle(getRotation());
-            thrusters.setVisible(true);
+            thrusterEffect.start();
         } else {
-            thrusters.setVisible(false);
+            thrusterEffect.stop();
         }
 
-        applyPhysics(dt);
+        applyPhysics(deltaTime);
 
         wrapAroundWorld();
 
