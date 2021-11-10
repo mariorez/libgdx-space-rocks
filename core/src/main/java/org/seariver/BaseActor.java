@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -555,7 +554,6 @@ public class BaseActor extends Group {
      */
     public void alignCamera() {
         Camera cam = this.getStage().getCamera();
-        Viewport v = this.getStage().getViewport();
 
         // center camera on actor
         cam.position.set(this.getX() + this.getOriginX(), this.getY() + this.getOriginY(), 0);
