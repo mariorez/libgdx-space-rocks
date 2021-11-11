@@ -70,6 +70,10 @@ public class BaseActor extends Group {
         boundaryPolygon = null;
     }
 
+    // ----------------------------------------------
+    // Limiting & Positioning methods
+    // ----------------------------------------------
+
     /**
      * If this object moves completely past the world bounds,
      * adjust its position to the opposite side of the world.
@@ -205,7 +209,7 @@ public class BaseActor extends Group {
     public Animation<TextureRegion> loadTexture(String fileName) {
         String[] fileNames = new String[1];
         fileNames[0] = fileName;
-        return loadAnimationFromFiles(fileNames, 1, true);
+        return loadAnimationFromFiles(fileNames, 1, false);
     }
 
     /**
