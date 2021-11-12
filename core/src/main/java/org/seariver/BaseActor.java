@@ -145,8 +145,7 @@ public class BaseActor extends Group {
         int fileCount = fileNames.length;
         Array<TextureRegion> textureArray = new Array<>();
 
-        for (int n = 0; n < fileCount; n++) {
-            String fileName = fileNames[n];
+        for (String fileName : fileNames) {
             Texture texture = new Texture(Gdx.files.internal(fileName));
             texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
             textureArray.add(new TextureRegion(texture));
@@ -225,7 +224,7 @@ public class BaseActor extends Group {
      * Checks if animation is complete: if play mode is normal (not looping)
      * and elapsed time is greater than time corresponding to last frame.
      *
-     * @return
+     * @return boolean
      */
     public boolean isAnimationFinished() {
         return animation.isAnimationFinished(elapsedTime);
