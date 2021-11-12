@@ -231,15 +231,6 @@ public class BaseActor extends Group {
         return animation.isAnimationFinished(elapsedTime);
     }
 
-    /**
-     * Sets the opacity of this actor.
-     *
-     * @param opacity value from 0 (transparent) to 1 (opaque)
-     */
-    public void setOpacity(float opacity) {
-        this.getColor().a = opacity;
-    }
-
     // ----------------------------------------------
     // Physics/Motion methods
     // ----------------------------------------------
@@ -613,7 +604,7 @@ public class BaseActor extends Group {
     }
 
     // ----------------------------------------------
-    // Actor methods: act and draw
+    // Actor methods: act, draw and etc.
     // ----------------------------------------------
 
     /**
@@ -651,5 +642,14 @@ public class BaseActor extends Group {
                     getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 
         super.draw(batch, parentAlpha);
+    }
+
+    /**
+     * Sets the opacity of this actor.
+     *
+     * @param opacity value from 0 (transparent) to 1 (opaque)
+     */
+    public void setOpacity(float opacity) {
+        this.getColor().a = opacity;
     }
 }
