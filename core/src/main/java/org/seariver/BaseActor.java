@@ -346,20 +346,20 @@ public class BaseActor extends Group {
      * Speed is limited by maxSpeed value. <br>
      * Acceleration vector reset to (0,0) at end of method. <br>
      *
-     * @param deltaTime Time elapsed since previous frame (delta time); typically obtained from <code>act</code> method.
+     * @param delta Time elapsed since previous frame (delta time); typically obtained from <code>act</code> method.
      * @see #acceleration
      * @see #deceleration
      * @see #maxSpeed
      */
-    public void applyPhysics(float deltaTime) {
+    public void applyPhysics(float delta) {
         // apply acceleration
-        velocityVec.add(accelerationVec.x * deltaTime, accelerationVec.y * deltaTime);
+        velocityVec.add(accelerationVec.x * delta, accelerationVec.y * delta);
 
         float speed = getSpeed();
 
         // decrease speed (decelerate) when not accelerating
         if (accelerationVec.len() == 0)
-            speed -= deceleration * deltaTime;
+            speed -= deceleration * delta;
 
         // keep speed within set bounds
         speed = MathUtils.clamp(speed, 0, maxSpeed);
@@ -368,7 +368,7 @@ public class BaseActor extends Group {
         setSpeed(speed);
 
         // update position according to value stored in velocity vector
-        moveBy(velocityVec.x * deltaTime, velocityVec.y * deltaTime);
+        moveBy(velocityVec.x * delta, velocityVec.y * delta);
 
         // reset acceleration
         accelerationVec.set(0, 0);
